@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Survey Form</title>
+
+    <style>
+      div {
+        width: 350px;
+        background: #56778a;
+        padding: 15px;
+        margin: 50px auto;
+        border-radius: 10px;  
+        color: white;
+      }
+
+      label {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 18px;
+      }
+
+      input {
+        width: 90%;
+        padding: 10px;
+        margin: 10px 0 10px 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: monospace;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      button {
+        display: block;
+        font-family: "Courier New", Courier, monospace;
+        width: 50%;
+        padding: 10px;
+        margin-top: 10px;
+        border: none;
+        background: white;
+        color: #8b62b1;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 45px auto;
+      }
+
+      button:hover {
+        background: #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2>Survey Form</h2>
+
+      <form id="surveyForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required />
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" required />
+
+        <label for="course">Course:</label>
+        <input type="text" id="course" required />
+
+        <label for="track">Track:</label>
+        <input type="text" id="track" />
+
+        <button type="submit" onclick="dispRecord()">Submit</button>
+      </form>
+
+      <h2>Records</h2>
+      <ul id="recordList"></ul>
+    </div>
+
+    <script>
+      function dispRecord() {
+        const name = document.getElementById("name").value;
+        const age = document.getElementById("age").value;
+        const course = document.getElementById("course").value;
+        const track = document.getElementById("track").value;
+
+        const recordList = document.getElementById("recordList");
+        const listItem = document.createElement("li");
+        listItem.textContent = `Name: ${name}, Age: ${age}, Course: ${course}, Track: ${track}`;
+        recordList.appendChild(listItem);
+        
+        document.getElementById("surveyForm").reset();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reminder App</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #009688, #004d40);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            border-radius: 12px;
+            background: #fff;
+            text-align: center;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+            animation: scaleUp 0.5s ease-in-out;
+        }
+
+        h1 {
+            color: #00796b;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        form {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        form input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #00796b;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        form input[type="text"]:focus {
+            border-color: #004d40;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 121, 107, 0.3);
+        }
+
+        form button {
+            padding: 12px 15px;
+            background: #00796b;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        form button:hover {
+            background: #004d40;
+        }
+
+        .reminder-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .reminder-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin-top: 8px;
+            background: #f1f8e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .reminder-list li:hover {
+            background: #c8e6c9;
+        }
+
+        .reminder-list li button {
+            padding: 6px 12px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .reminder-list li button:hover {
+            background: #b71c1c;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Reminder App</h1>
+        <form id="reminderForm">
+            <input type="text" id="reminderInput" placeholder="Enter your reminder..." required>
+            <button type="submit">Add</button>
+        </form>
+        <ul class="reminder-list" id="reminderList"></ul>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("reminderForm");
+            const input = document.getElementById("reminderInput");
+            const list = document.getElementById("reminderList");
+
+            // Load reminders from local storage
+            const reminders = JSON.parse(localStorage.getItem("reminders")) || [];
+            reminders.forEach(addReminderToDOM);
+
+            // Add a reminder
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                const text = input.value.trim();
+                if (text === "") return;
+
+                addReminderToDOM(text);
+                reminders.push(text);
+                localStorage.setItem("reminders", JSON.stringify(reminders));
+
+                input.value = "";
+            });
+
+            // Function to add a reminder to the DOM
+            function addReminderToDOM(text) {
+                const li = document.createElement("li");
+                li.textContent = text;
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "Delete";
+                deleteBtn.addEventListener("click", function () {
+                    li.remove();
+                    removeReminder(text);
+                });
+
+                li.appendChild(deleteBtn);
+                list.appendChild(li);
+            }
+
+            // Remove a reminder
+            function removeReminder(text) {
+                const index = reminders.indexOf(text);
+                if (index > -1) {
+                    reminders.splice(index, 1);
+                    localStorage.setItem("reminders", JSON.stringify(reminders));
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

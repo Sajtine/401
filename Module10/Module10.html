@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 10 Activity</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #f3e7ff, #d3cce3);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 320px;
+            backdrop-filter: blur(10px);
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            margin-top: 12px;
+            color: #5a4a75;
+            font-family: monospace;
+        }
+
+        select, input {
+            margin-top: 5px;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease;
+            outline: none;
+            font-family: monospace;
+        }
+
+        select:focus, input:focus {
+            background: white;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <label for="city">Select a City: </label>
+        <select id="city" name="city">
+            <option value="iloilo-city">Iloilo City</option>
+            <option value="guimaras">Guimaras</option>
+            <option value="roxas">Roxas</option>
+            <option value="antique">Antique</option>
+        </select>
+        <label for="date">Select a Date: </label>
+        <input type="date" id="date" name="date">
+    </div>
+
+</body>
+</html>

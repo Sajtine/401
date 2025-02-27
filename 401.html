@@ -1,0 +1,78 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Simple Form Example with React.js</title>
+
+        <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="form-example"></div>
+
+        <script type="text/babel">
+            const { useState } = React;
+
+            const Form = () => {
+                const [idno, setIdno] = useState("");
+                const [name, setName] = useState("");
+                const [course, setCourse] = useState("");
+                const [displayinfo, setDisplayInfo] = useState(false);
+
+                const handleIdnoChange = (event) => {
+                    setIdno(event.target.value);
+                };
+                const handleNameChange = (event) => {
+                    setName(event.target.value);
+                };
+                const handleCourseChange = (event) => {
+                    setCourse(event.target.value);
+                };
+                const handleSubmit = (event) => {
+                    event.preventDefault();
+                    setDisplayInfo(true);
+                };
+
+                return (
+                    <div>
+                        <h2 style={{ color: 'green' }}>Platform of Technology</h2>
+                        <form onSubmit={handleSubmit}>
+                            <label htmlFor="idno">Enter Id Number:</label>
+                            <input type="text" id="idno" value={idno} onChange={handleIdnoChange} />
+                            <br />
+                            <label htmlFor="name">Enter Name:</label>
+                            <input type="text" id="name" value={name} onChange={handleNameChange} />
+                            <br />
+                            <label htmlFor="course">Enter Course:</label>
+                            <input type="text" id="course" value={course} onChange={handleCourseChange} />
+                            <br />
+                            <button
+                                type="submit"
+                                style={{
+                                    backgroundColor: "green",
+                                    color: "white",
+                                    padding: "10px 20px",
+                                    borderRadius: "5px",
+                                    border: "none",
+                                    marginTop: "10px",
+                                }}
+                            >
+                                Display Info
+                            </button>
+                        </form>
+                        {displayinfo && (
+                            <div style={{ marginTop: "10px" }}>
+                                <p>Id Number: {idno}</p>
+                                <p>Name: {name}</p>
+                                <p>Course: {course}</p>
+                            </div>
+                        )}
+                    </div>
+                );
+            };
+
+            ReactDOM.render(<Form />, document.getElementById("form-example"));
+        </script>
+    </body>
+    </html>
