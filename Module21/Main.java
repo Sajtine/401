@@ -6,6 +6,7 @@ public class Main{
         Scanner sc = new Scanner(System.in);
 
         System.out.println("This is a mini AI Chat Bot!!");
+        System.out.println("Type 'bye' to end the conversation.");
 
         String userInput;
 
